@@ -16,6 +16,18 @@
     <link type="text/css" rel="stylesheet" href="https://divisist.ufps.edu.co/assets/css/adminlte/skins/_all-skins.min.css">
     <link type="text/css" rel="stylesheet" href="https://divisist.ufps.edu.co/assets/css/adminlte/skins/skin-red-light.min.css">
     <link type="text/css" rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+     <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/bootstrap/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/fontawesome/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/fontawesome-v5.2.0/css/all.min.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/fontawesome-v5.2.0/css/v4-shims.min.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/hovermaster/hover-min.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/adminlte/AdminLTE.min.css">
+  <link type="text/css" rel="stylesheet" href="css/custom.css">
+  <link type="text/css" rel="stylesheet" href="https://udirplan.ufps.edu.co/assets/css/style.css">
   </head>
 <body id="content_completw" class="skin-red-light sidebar-mini ">
 <div class="wrapper">
@@ -67,14 +79,14 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="index.php" class="btn btn-default btn-flat"><i class="zmdi zmdi-eye-off"></i> Cerrar Sesión</a>
+                  <a href="Main.html" class="btn btn-default btn-flat"><i class="zmdi zmdi-eye-off"></i> Cerrar Sesión</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-              <a href="index.php"><i class="zmdi zmdi-power-setting"></i></a>
+              <a href="Main.html"><i class="zmdi zmdi-power-setting"></i></a>
           </li>
         </ul>
     </div>
@@ -100,14 +112,14 @@
                   <span>Estudiantes Inscritos</span>
                 </a>
                 <ul>
-                  <li><a href="admin.php"> Lista de estudiantes </a></li>
+                  <li><a href="javascript:preEstudianteList('contenido')"> Lista de estudiantes </a></li>
                 </ul>
             </li>
             <li class=" treeview">
                 <a href="#"><i class="zmdi zmdi-folder"></i> <span>Información Módulos</span></a>
                 <ul>
-                  <li><a href="modulos.php">Ver Módulos</a></li>
-                  <li><a href="crear.php">Crear Módulos</a></li>
+                  <li><a href="javascript:preModuloList('contenido')">Ver Módulos</a></li>
+                  <li><a href="javascript:abrirInsertarModulo()">Crear Módulos</a></li>
                 </ul>
             </li>
     </section>
@@ -116,7 +128,7 @@
 
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper" id="contenido">
   <section class="content-header">
   <!-- Alertas  -->
   <div id="template_alerts"></div>
@@ -131,11 +143,10 @@
         <h2 class="box-title">Listado de Estudiantes</h2>
       </div>
     <div class="box-body no-padding clearfix">
-
         <div class="table-responsive">
             <table  class="table table-hover" style="vertical-align: middle;">
-                <tbody>
-                    <tr>
+                <thead>
+                  <tr>
                       <th>Código</th>
                       <th>Documento</th>
                       <th>Nombre Completo</th>
@@ -143,13 +154,16 @@
                       <th>Promedio</th>
                       <th>Consignación</th>
                     </tr>
+                </thead>
+                <tbody id="estudianteList">
+                    
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 </div>
-
+</section>
 <footer class="main-footer">
   Curso de Profundización de Software UFPS &copy; 2019. <span class="hidden-xs">Version <b>1.0</b></span>
   <div class='modal modal-info fade' id='modal_mensaje_imp' tabindex='-1' role='dialog'>
@@ -177,5 +191,17 @@
 <script type="text/javascript" src="https://divisist.ufps.edu.co/assets/js/adminlte/app.min.js"></script>
 <script type="text/javascript" src="https://divisist.ufps.edu.co/assets/js/custom/cerrar.js"></script>
 <script type="text/javascript" src="https://divisist.ufps.edu.co/assets/js/views/login/portales.js"></script>
+
+<script src="js/ViewManager.js"></script>
+  <script src="js/Ajax.js"></script>
+  <script src="js/HtmlBuilder.js"></script>
+
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+
+<script type="text/javascript">
+    preEstudianteList('contenido');
+  </script>
+
 </body>
 </html>

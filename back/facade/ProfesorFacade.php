@@ -119,6 +119,14 @@ class ProfesorFacade {
      return $result;
   }
 
+  public static function login($usuario,$documento,$password){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $profesorDao =$FactoryDao->getprofesorDao(self::getDataBaseDefault());
+     $result = $profesorDao->login($usuario,$documento,$password);
+     $profesorDao->close();
+     return $result;
+  }
+
 
 }
 //That`s all folks!

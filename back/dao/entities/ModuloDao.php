@@ -30,16 +30,12 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($modulo){
-      $id=$modulo->getId();
 $nombre=$modulo->getNombre();
-$descripcion=$modulo->getDescripcion();
-$calificacion=$modulo->getCalificacion();
-$curso=$modulo->getCurso()->getId();
 $profesor=$modulo->getProfesor()->getCod();
 
       try {
-          $sql= "INSERT INTO `modulo`( `id`, `nombre`, `descripcion`, `calificacion`, `curso`, `profesor`)"
-          ."VALUES ('$id','$nombre','$descripcion','$calificacion','$curso','$profesor')";
+          $sql= "INSERT INTO `modulo`( `nombre`, `profesor`)"
+          ."VALUES ('$nombre','$profesor')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -124,6 +120,29 @@ $profesor=$modulo->getProfesor()->getCod();
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function listAll(){
+      $lista = array();
+      try {
+          $sql ="SELECT m.`nombre`, p.`nombre` as \"profesor\""
+          ."FROM `modulo` m INNER JOIN `profesor` p ON m.`profesor` = p.`cod`"
+          ."WHERE 1";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $modulo= new Modulo();
+          $modulo->setNombre($data[$i]['nombre']);
+           $profesor = new Profesor();
+           $profesor->setNombre($data[$i]['profesor']);
+           $modulo->setProfesor($profesor);
+
+          array_push($lista,$modulo);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
+  public function listAll_original(){
       $lista = array();
       try {
           $sql ="SELECT `id`, `nombre`, `descripcion`, `calificacion`, `curso`, `profesor`"

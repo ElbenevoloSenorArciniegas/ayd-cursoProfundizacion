@@ -22,6 +22,55 @@ function validarForm(idForm){
 	return true;
 }
 
+
+/// LOGIN
+function preLogin(idForm) {
+  // if(validarForm(idForm)){
+    var loginForm=$('#'+idForm).serializeArray();
+    var formData = {};
+    $.each(loginForm,
+        function(i, v) {
+            formData[v.name] = v.value;
+        });
+     formData["ruta"]="login";
+    enviar(formData, rutaBack ,postLogin);
+    //)}else{
+      //  alert("Debe llenar los campos requeridos");
+    //}
+}
+
+CURRENT_USER={};
+
+function postLogin(result,state){
+     //Maneje aquÃ­ la respuesta del servidor.
+     //Consideramos buena prÃ¡ctica no manejar cÃ³digo HTML antes de este punto.
+     result=JSON.parse(result);
+        if(state=="success"){
+             if(result.msg=="true"){
+
+                CURRENT_USER=result.obj
+                switch(CURRENT_USER.tipo){
+                    case "admin":
+                        //cargaContenido("main","admin.html");
+                        window.location="admin.html";
+                        break;
+                    case "profesor":
+                        cargaContenido("main","noDesarrollado.html");
+                        break;
+                    case "estudiante":
+                        cargaContenido("main","noDesarrollado.html");
+                        break;
+                }
+             }else{
+                alert("Datos incorrectos o no registrados");
+             }      
+        }else{
+            alert("Hubo un errror interno ( u.u)\n"+result);
+        }
+}
+
+
+
 ////////// CONTENIDO \\\\\\\\\\
 function preContenidoInsert(idForm){
      //Haga aquÃ­ las validaciones necesarias antes de enviar el formulario.
@@ -145,7 +194,7 @@ function preEstudianteInsert(idForm){
      //Consideramos buena prÃ¡ctica no manejar cÃ³digo HTML antes de este punto.
  		if(state=="success"){
                      if(result=="true"){            
- 			alert("Estudiante registrado con Ã©xito");
+ 			alert("Estudiante registrado con Éxito");
                      }else{
                         alert("Hubo un errror en la inserciÃ³n ( u.u)\n"+result);
                      } 		}else{
@@ -155,7 +204,7 @@ function preEstudianteInsert(idForm){
 
 function preEstudianteList(container){
      //Solicite informaciÃ³n del servidor
-     cargaContenido(container,'EstudianteList.html'); 
+     cargaContenido(container,'listEstudiantes.html'); 
      var formData = {};
      formData["ruta"]="EstudianteList";
  	enviar(formData, rutaBack ,postEstudianteList); 
@@ -170,7 +219,7 @@ function preEstudianteList(container){
             for(var i=1; i < Object.keys(json).length; i++) {   
                 var Estudiante = json[i];
                 //----------------- Para una tabla -----------------------
-                document.getElementById("EstudianteList").appendChild(createTR(Estudiante));
+                document.getElementById("estudianteList").appendChild(createTR(Estudiante));
                 //-------- Para otras opciones ver htmlBuilder.js ---------
             }
          }else{
@@ -184,9 +233,17 @@ function preEstudianteList(container){
 ////////// MODULO \\\\\\\\\\
 function preModuloInsert(idForm){
      //Haga aquÃ­ las validaciones necesarias antes de enviar el formulario.
-	if(validarForm(idForm)){
- 	var formData=$('#'+idForm).serialize();
+     if(validarForm(idForm)){
+	/*var form=$('#'+idForm).serializeArray();
+    var formData = {};
+    $.each(form,
+        function(i, v) {
+            formData[v.name] = v.value;
+        });*/
+formData={};
      formData["ruta"]="ModuloInsert";
+     formData["nombre"]=input_nombre.value;
+     formData["profesor"]=ProfesorList.value;
  	enviar(formData, rutaBack ,postModuloInsert);
  	}else{
  		alert("Debe llenar los campos requeridos");
@@ -198,7 +255,7 @@ function preModuloInsert(idForm){
      //Consideramos buena prÃ¡ctica no manejar cÃ³digo HTML antes de este punto.
  		if(state=="success"){
                      if(result=="true"){            
- 			alert("Modulo registrado con Ã©xito");
+ 			alert("Modulo registrado con Éxito");
                      }else{
                         alert("Hubo un errror en la inserciÃ³n ( u.u)\n"+result);
                      } 		}else{
@@ -259,9 +316,9 @@ function preProfesorInsert(idForm){
  		}
 }
 
-function preProfesorList(container){
+function preProfesorList(){
      //Solicite informaciÃ³n del servidor
-     cargaContenido(container,'ProfesorList.html'); 
+     //cargaContenido(container,'ProfesorList.html'); 
      var formData = {};
      formData["ruta"]="ProfesorList";
  	enviar(formData, rutaBack ,postProfesorList); 
@@ -276,7 +333,8 @@ function preProfesorList(container){
             for(var i=1; i < Object.keys(json).length; i++) {   
                 var Profesor = json[i];
                 //----------------- Para una tabla -----------------------
-                document.getElementById("ProfesorList").appendChild(createTR(Profesor));
+                console.log(Profesor);
+                document.getElementById("ProfesorList").appendChild(createOPTION(Profesor.cod,Profesor.nombre));
                 //-------- Para otras opciones ver htmlBuilder.js ---------
             }
          }else{
@@ -285,6 +343,13 @@ function preProfesorList(container){
      }else{
          alert("Hubo un errror interno ( u.u)\n"+result);
      }
+}
+
+function abrirInsertarModulo () {
+    cargaContenido('contenido','insertModulo.html');
+    setTimeout(function(){ 
+        preProfesorList();
+    }, 300);
 }
 
 //That`s all folks!

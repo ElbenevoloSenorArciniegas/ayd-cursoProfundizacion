@@ -44,5 +44,14 @@ return true;
         return "[{$msg},{$rta}]";
     }
 
+    public static function login(){
+        $usuario = strip_tags($_POST['usuario']);
+        $documento = strip_tags($_POST['documento']);
+        $password = strip_tags($_POST['password']);
+        $rta = ProfesorFacade::login($usuario,$documento,$password);
+        
+        return json_encode($rta);
+    }
+
 }
 //That`s all folks!

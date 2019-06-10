@@ -40,13 +40,9 @@ class ModuloFacade {
    * @param curso
    * @param profesor
    */
-  public static function insert( $id,  $nombre,  $descripcion,  $calificacion,  $curso,  $profesor){
+  public static function insert( $nombre, $profesor){
       $modulo = new Modulo();
-      $modulo->setId($id); 
       $modulo->setNombre($nombre); 
-      $modulo->setDescripcion($descripcion); 
-      $modulo->setCalificacion($calificacion); 
-      $modulo->setCurso($curso); 
       $modulo->setProfesor($profesor); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());

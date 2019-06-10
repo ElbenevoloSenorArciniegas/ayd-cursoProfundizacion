@@ -138,6 +138,38 @@ $isAdmin=$profesor->getIsAdmin();
       }
   }
 
+   public function login($usuario,$documento,$password){
+      $lista = array();
+
+      $sql_1 = "SELECT * FROM `estudiante` WHERE `cod` = '$usuario' AND `cedula` = '$documento' AND `password` = '$password'";
+      $sql_2 = "SELECT * FROM `profesor` WHERE `cod` = '$usuario' AND `cedula` = '$documento' AND `password` = '$password'";
+
+      try {
+          $data = $this->ejecutarConsulta($sql_1);
+          if(empty($data)){
+            $data = $this->ejecutarConsulta($sql_2);
+            if(empty($data)){
+              return array('msg' => 'false');
+            }else{
+              $rol="profesor";
+              if($data[0]['isAdmin']){
+                $rol="admin";
+              }
+              return array('msg' => 'true',
+                'obj'=>array('cod'=>$data[0]['cod'],'nombre'=>$data[0]['nombre'],'cedula'=>$data[0]['cedula'],'tipo'=>$rol));
+            }
+          }else{
+            $rol="estudiante";
+            return array('msg' => 'true',
+                  'cod'=>$data[0]['cod'],'nombre'=>$data[0]['nombre'],'cedula'=>$data[0]['cedula'],'tipo'=>$rol
+              );
+          }
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
       public function insertarConsulta($sql){
           $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $sentencia=$this->cn->prepare($sql);

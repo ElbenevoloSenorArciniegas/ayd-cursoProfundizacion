@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2019 a las 22:24:09
+-- Tiempo de generación: 11-06-2019 a las 00:08:50
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -46,6 +46,13 @@ CREATE TABLE `curso` (
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `curso`
+--
+
+INSERT INTO `curso` (`id`, `nombre`) VALUES
+(1, 'Seguridad Informatica');
+
 -- --------------------------------------------------------
 
 --
@@ -61,8 +68,16 @@ CREATE TABLE `estudiante` (
   `direccion` varchar(80) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `promedio` float NOT NULL,
+  `consignacion` blob NOT NULL,
   `curso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`cod`, `nombre`, `correo`, `cedula`, `password`, `direccion`, `telefono`, `promedio`, `consignacion`, `curso`) VALUES
+('1151300', 'Estudiante de prueba', 'prueba@ufps.edu.co', '1090515000', '0000', 'Somewhere', '3118558000', 4, '', 1);
 
 -- --------------------------------------------------------
 
@@ -75,9 +90,16 @@ CREATE TABLE `modulo` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` text NOT NULL,
   `calificacion` float NOT NULL,
-  `curso` int(11) NOT NULL,
+  `curso` int(11) NOT NULL DEFAULT '1',
   `profesor` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `modulo`
+--
+
+INSERT INTO `modulo` (`id`, `nombre`, `descripcion`, `calificacion`, `curso`, `profesor`) VALUES
+(9, 'Modulo de prueba', '', 0, 1, '1151234');
 
 -- --------------------------------------------------------
 
@@ -92,6 +114,15 @@ CREATE TABLE `profesor` (
   `password` varchar(45) NOT NULL,
   `isAdmin` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`cod`, `nombre`, `cedula`, `password`, `isAdmin`) VALUES
+('1151234', 'Pilar Rojas', '1234', '0000', 0),
+('1151235', 'Pilar Rodriguez', '1234', '0000', 1),
+('1151398', 'Carlos Rene Angarita', '18293', '0000', 0);
 
 --
 -- Índices para tablas volcadas
@@ -145,13 +176,13 @@ ALTER TABLE `contenido`
 -- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `modulo`
 --
 ALTER TABLE `modulo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas

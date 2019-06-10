@@ -45,6 +45,9 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'ProfesorList':
     			$rtn = ProfesorController::listAll();
     			break;
+        case 'login':
+          $rtn = ProfesorController::login();
+          break;
     		default:
     			$rtn="404 Ruta no encontrada.";
     			break;

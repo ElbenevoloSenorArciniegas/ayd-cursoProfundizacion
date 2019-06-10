@@ -33,15 +33,12 @@ return true;
         foreach ($list as $obj => $Estudiante) {	
 	       $rta.="{
 	    \"cod\":\"{$Estudiante->getcod()}\",
-	    \"nombre\":\"{$Estudiante->getnombre()}\",
-	    \"correo\":\"{$Estudiante->getcorreo()}\",
 	    \"cedula\":\"{$Estudiante->getcedula()}\",
-	    \"password\":\"{$Estudiante->getpassword()}\",
+        \"nombre\":\"{$Estudiante->getnombre()}\",
+	    \"correo\":\"{$Estudiante->getcorreo()}\",
 	    \"direccion\":\"{$Estudiante->getdireccion()}\",
 	    \"telefono\":\"{$Estudiante->gettelefono()}\",
-	    \"promedio\":\"{$Estudiante->getpromedio()}\",
-	    \"curso_id\":\"{$Estudiante->getcurso()->getid()}\"
-	       },";
+	    \"promedio\":\"{$Estudiante->getpromedio()}\"},";
         }
 
         if($rta!=""){
