@@ -201,6 +201,7 @@ function preEstudianteInsert(idForm){
  		if(state=="success"){
                      if(result=="true"){            
  			alert("Estudiante registrado con Éxito");
+            cargaContenido("main","informacion.html");
                      }else{
                         alert("Hubo un errror en la inserciÃ³n ( u.u)\n"+result);
                      } 		}else{

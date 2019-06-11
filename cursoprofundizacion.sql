@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2019 a las 00:08:50
+-- Tiempo de generación: 11-06-2019 a las 05:26:28
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -77,7 +77,9 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`cod`, `nombre`, `correo`, `cedula`, `password`, `direccion`, `telefono`, `promedio`, `consignacion`, `curso`) VALUES
-('1151300', 'Estudiante de prueba', 'prueba@ufps.edu.co', '1090515000', '0000', 'Somewhere', '3118558000', 4, '', 1);
+('0000', '0000', '0000', '0000', '0000', '0000', '0000', 4, '', 1),
+('1111', '1111', '1111', '1111', '1111', '1111', '1111', 1, '', 1),
+('1151300', 'Estudiante de prueba', 'prueba@ufps.edu.co', '1090555000', '0000', 'Somewhere', '3118558000', 4, '', 1);
 
 -- --------------------------------------------------------
 
