@@ -82,12 +82,16 @@ function getLogged() {
             Link_crearMod.style.visibility="hidden";
             Link_cargarMod.href="javascript:preModuloListBy('contenido','"+CURRENT_USER.cod+"')";
             preEstudianteList('contenido');
+            span_rol.innerHTML="Profesor";
+            span_rol2.innerHTML="Profesor";
             break;
         case "estudiante":
             estudiantes_treeview.style.display="none";
             Link_crearMod.style.visibility="hidden";
             Link_cargarMod.href="javascript:preModuloListBy('contenido','"+CURRENT_USER.cod+"')";
             preModuloListBy('contenido',CURRENT_USER.cod);
+            span_rol.innerHTML="Estudiante";
+            span_rol2.innerHTML="Estudiante";
             break;
     }
 }
@@ -320,6 +324,7 @@ function preModuloListBy(container,cod){
                 //-------- Para otras opciones ver htmlBuilder.js ---------
             }
          }else{
+            console.log(json[0]);
             alert(json[0].result);
          }
      }else{

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Subir cosas</title>
+</head>
+<body>
+	<h1>Soy una etiqueta que sube archivos</h1>
+	<input id="inputFile" type="file">
+	<br><br>
+	<button id="btnEnviar">Enviar</button>
+	<script type="text/javascript">
+	
+const btnEnviar = document.querySelector("#btnEnviar");
+const inputFile = document.querySelector("#inputFile");
+
+btnEnviar.addEventListener("click", () => {
+    if (inputFile.files.length > 0) {
+        let formData = new FormData();
+        formData.append("archivo", inputFile.files[0]); // En la posición 0; es decir, el primer elemento
+        fetch("../back/controller/guardar.php", {
+            method: 'POST',
+            body: formData,
+        })
+            .then(respuesta => respuesta.text())
+            .then(decodificado => {
+                console.log(decodificado);
+            });
+    } else {
+        // El usuario no ha seleccionado archivos
+        alert("Selecciona un archivo");
+    }
+});
+
+
+	</script>
+</body>
+</html>

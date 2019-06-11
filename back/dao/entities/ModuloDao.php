@@ -145,7 +145,7 @@ $profesor=$modulo->getProfesor()->getCod();
 public function listBy($cod){
       $lista = array();
       try {
-          $sql ="SELECT m.`nombre`, p.`nombre` as \"profesor\""
+          $sql ="SELECT DISTINCT m.`nombre`, p.`nombre` as \"profesor\""
           ."FROM `modulo` m INNER JOIN `profesor` p ON m.`profesor` = p.`cod` "
           ."INNER JOIN `estudiante` e ON m.`curso` = e.`curso` "
           ."WHERE m.`profesor`=$cod OR e.`cod`=$cod";
