@@ -48,7 +48,8 @@ function postLogin(result,state){
         if(state=="success"){
              if(result.msg=="true"){
 
-                CURRENT_USER=result.obj
+                CURRENT_USER=result.obj;
+                console.log(result);
                 switch(CURRENT_USER.tipo){
                     case "admin":
                         //cargaContenido("main","admin.html");
@@ -181,7 +182,12 @@ function preCursoList(container){
 function preEstudianteInsert(idForm){
      //Haga aquÃ­ las validaciones necesarias antes de enviar el formulario.
 	if(validarForm(idForm)){
- 	var formData=$('#'+idForm).serialize();
+ 	var loginForm=$('#'+idForm).serializeArray();
+    var formData = {};
+    $.each(loginForm,
+        function(i, v) {
+            formData[v.name] = v.value;
+        });
      formData["ruta"]="EstudianteInsert";
  	enviar(formData, rutaBack ,postEstudianteInsert);
  	}else{

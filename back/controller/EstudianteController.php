@@ -20,11 +20,11 @@ class EstudianteController {
         $direccion = strip_tags($_POST['direccion']);
         $telefono = strip_tags($_POST['telefono']);
         $promedio = strip_tags($_POST['promedio']);
-        $Curso_id = strip_tags($_POST['curso']);
+        $Curso_id = strip_tags(1);
         $curso= new Curso();
         $curso->setId($Curso_id);
         EstudianteFacade::insert($cod, $nombre, $correo, $cedula, $password, $direccion, $telefono, $promedio, $curso);
-return true;
+return "true";
     }
 
     public static function listAll(){

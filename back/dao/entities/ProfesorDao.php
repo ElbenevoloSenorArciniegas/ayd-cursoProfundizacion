@@ -161,7 +161,7 @@ $isAdmin=$profesor->getIsAdmin();
           }else{
             $rol="estudiante";
             return array('msg' => 'true',
-                  'cod'=>$data[0]['cod'],'nombre'=>$data[0]['nombre'],'cedula'=>$data[0]['cedula'],'tipo'=>$rol
+                  'obj'=>array('cod'=>$data[0]['cod'],'nombre'=>$data[0]['nombre'],'cedula'=>$data[0]['cedula'],'tipo'=>$rol)
               );
           }
       } catch (SQLException $e) {

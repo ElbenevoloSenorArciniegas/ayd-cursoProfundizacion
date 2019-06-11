@@ -13,23 +13,27 @@
 <form method="POST" class="register-form" id="register-form">
     <div class="form-group">
         <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-        <input type="text" name="name" id="name" placeholder="Nombre Completo" required="required"/>
+        <input type="text" name="nombre" id="name" placeholder="Nombre Completo" required="required"/>
     </div>
     <div class="form-group">
         <label for="email"><i class="zmdi zmdi-email"></i></label>
-        <input type="email" name="email" id="email" placeholder="Correo"/>
+        <input type="email" name="correo" id="email" placeholder="Correo"/>
     </div>
     <div class="form-group">
         <label for="documento"><i class="zmdi zmdi-account"></i></label>
-        <input type="text" name="documento" id="documento" placeholder="Número de documento"/>
+        <input type="text" name="cedula" id="documento" placeholder="Número de documento"/>
     </div>
     <div class="form-group">
         <label for="codigo"><i class="zmdi zmdi-local-library"></i></label>
-        <input type="text" name="codigo" id="codigo" placeholder="Código" required="required"/>
+        <input type="text" name="cod" id="codigo" placeholder="Código" required="required"/>
+    </div>
+    <div class="form-group">
+        <label for="pass"><i class="zmdi zmdi-local-library"></i></label>
+        <input type="password" name="password" id="pass" placeholder="Contraseña" required="required"/>
     </div>
     <div class="form-group">
         <label for="celular"><i class="zmdi zmdi-account-box-phone"></i></label>
-        <input type="text" name="celular" id="celular" placeholder="Número de celular" required="required"/>
+        <input type="text" name="telefono" id="celular" placeholder="Número de celular" required="required"/>
     </div>
     <div class="form-group">
         <label for="direccion"><i class="zmdi zmdi-directions"></i></label>
@@ -41,7 +45,7 @@
     </div>
     <div class="form-group">
         <label for="promedio"><i class="zmdi zmdi-cloud-upload"></i></label>
-        <input type="file"/>
+        <input name="" type="file"/>
     </div>
     <div class="form-group form-button">
         <a href="javascript:preEstudianteInsert('register-form')" class="btn btn-danger btn-block btn-flat"> Regístrese</a> 
