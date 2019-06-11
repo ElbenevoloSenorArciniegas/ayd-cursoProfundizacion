@@ -40,6 +40,27 @@ return "true";
         return "[{$msg},{$rta}]";
     }
 
+    public static function listBy(){
+        $cod = strip_tags($_POST['cod']);
+        $list=ModuloFacade::listBy($cod);
+        $rta="";
+        foreach ($list as $obj => $Modulo) {  
+         $rta.="{
+      \"nombre\":\"{$Modulo->getnombre()}\",
+      \"profesor\":\"{$Modulo->getprofesor()->getnombre()}\"
+         },";
+        }
+
+        if($rta!=""){
+         $rta = substr($rta, 0, -1);
+         $msg="{\"msg\":\"exito\"}";
+        }else{
+         $msg="{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+         $rta="{\"result\":\"No se encontraron registros.\"}";  
+        }
+        return "[{$msg},{$rta}]";
+    }
+
     public static function listAll_original(){
         $list=ModuloFacade::listAll();
         $rta="";

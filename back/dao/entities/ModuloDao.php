@@ -142,6 +142,30 @@ $profesor=$modulo->getProfesor()->getCod();
       }
   }
 
+public function listBy($cod){
+      $lista = array();
+      try {
+          $sql ="SELECT m.`nombre`, p.`nombre` as \"profesor\""
+          ."FROM `modulo` m INNER JOIN `profesor` p ON m.`profesor` = p.`cod` "
+          ."INNER JOIN `estudiante` e ON m.`curso` = e.`curso` "
+          ."WHERE m.`profesor`=$cod OR e.`cod`=$cod";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $modulo= new Modulo();
+          $modulo->setNombre($data[$i]['nombre']);
+           $profesor = new Profesor();
+           $profesor->setNombre($data[$i]['profesor']);
+           $modulo->setProfesor($profesor);
+
+          array_push($lista,$modulo);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
   public function listAll_original(){
       $lista = array();
       try {

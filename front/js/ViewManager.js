@@ -44,22 +44,23 @@ CURRENT_USER={};
 function postLogin(result,state){
      //Maneje aquÃ­ la respuesta del servidor.
      //Consideramos buena prÃ¡ctica no manejar cÃ³digo HTML antes de este punto.
+     var sesTxt=result;
      result=JSON.parse(result);
         if(state=="success"){
              if(result.msg=="true"){
 
                 CURRENT_USER=result.obj;
-                console.log(result);
+                sessionStorage.CURRENT_USER = sesTxt;
                 switch(CURRENT_USER.tipo){
                     case "admin":
                         //cargaContenido("main","admin.html");
                         window.location="admin.html";
                         break;
                     case "profesor":
-                        cargaContenido("main","noDesarrollado.html");
+                        window.location="admin.html";
                         break;
                     case "estudiante":
-                        cargaContenido("main","noDesarrollado.html");
+                        window.location="admin.html";
                         break;
                 }
              }else{
@@ -70,7 +71,26 @@ function postLogin(result,state){
         }
 }
 
-
+function getLogged() {
+    CURRENT_USER = JSON.parse(sessionStorage.CURRENT_USER).obj;
+    nombreUser.innerHTML = CURRENT_USER.nombre;
+    switch(CURRENT_USER.tipo){
+        case "admin":
+            preEstudianteList('contenido');
+            break;
+        case "profesor":
+            Link_crearMod.style.visibility="hidden";
+            Link_cargarMod.href="javascript:preModuloListBy('contenido','"+CURRENT_USER.cod+"')";
+            preEstudianteList('contenido');
+            break;
+        case "estudiante":
+            estudiantes_treeview.style.display="none";
+            Link_crearMod.style.visibility="hidden";
+            Link_cargarMod.href="javascript:preModuloListBy('contenido','"+CURRENT_USER.cod+"')";
+            preModuloListBy('contenido',CURRENT_USER.cod);
+            break;
+    }
+}
 
 ////////// CONTENIDO \\\\\\\\\\
 function preContenidoInsert(idForm){
@@ -278,6 +298,15 @@ function preModuloList(container){
  	enviar(formData, rutaBack ,postModuloList); 
 }
 
+function preModuloListBy(container,cod){
+     //Solicite informaciÃ³n del servidor
+     cargaContenido(container,'ModuloList.html'); 
+     var formData = {};
+     formData["ruta"]="ModuloListBy";
+     formData["cod"]=cod;
+    enviar(formData, rutaBack ,postModuloList); 
+}
+
  function postModuloList(result,state){
      //Maneje aquÃ­ la respuesta del servidor.
      if(state=="success"){
@@ -291,7 +320,7 @@ function preModuloList(container){
                 //-------- Para otras opciones ver htmlBuilder.js ---------
             }
          }else{
-            alert(json[0].msg);
+            alert(json[0].result);
          }
      }else{
          alert("Hubo un errror interno ( u.u)\n"+result);

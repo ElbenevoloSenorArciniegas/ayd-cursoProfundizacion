@@ -121,6 +121,13 @@ class ModuloFacade {
      return $result;
   }
 
+ public static function listBy($cod){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $moduloDao =$FactoryDao->getmoduloDao(self::getDataBaseDefault());
+     $result = $moduloDao->listBy($cod);
+     $moduloDao->close();
+     return $result;
+  }
 
 }
 //That`s all folks!

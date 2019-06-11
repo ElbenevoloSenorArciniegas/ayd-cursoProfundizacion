@@ -39,6 +39,9 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'ModuloList':
     			$rtn = ModuloController::listAll();
     			break;
+        case 'ModuloListBy':
+          $rtn = ModuloController::listBy();
+          break;
            case 'ProfesorInsert':
     			$rtn = ProfesorController::insert();
     			break;

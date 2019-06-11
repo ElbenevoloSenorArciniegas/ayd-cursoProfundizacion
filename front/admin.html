@@ -102,24 +102,24 @@
                 <img src="img/user.png" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Judith del Pilar</p>
+                <p id="nombreUser">Judith del Pilar</p>
             </div>
         </div>
         <ul class="sidebar-menu" style="min-height: 600px;">
             <li class="header">NAVEGACIÓN PRINCIPAL</li>
-            <li class="active treeview">
+            <li id="estudiantes_treeview" class="active treeview">
                 <a href="#"><i class="zmdi zmdi-folder-person"></i>
                   <span>Estudiantes Inscritos</span>
                 </a>
                 <ul>
-                  <li><a href="javascript:preEstudianteList('contenido')"> Lista de estudiantes </a></li>
+                  <li><a id="Link_cargarEst" href="javascript:preEstudianteList('contenido')"> Lista de estudiantes </a></li>
                 </ul>
             </li>
             <li class=" treeview">
                 <a href="#"><i class="zmdi zmdi-folder"></i> <span>Información Módulos</span></a>
                 <ul>
-                  <li><a href="javascript:preModuloList('contenido')">Ver Módulos</a></li>
-                  <li><a href="javascript:abrirInsertarModulo()">Crear Módulos</a></li>
+                  <li><a id="Link_cargarMod" href="javascript:preModuloList('contenido')">Ver Módulos</a></li>
+                  <li id="Link_crearMod"><a href="javascript:abrirInsertarModulo()">Crear Módulos</a></li>
                 </ul>
             </li>
     </section>
@@ -200,7 +200,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
 
 <script type="text/javascript">
-    preEstudianteList('contenido');
+    getLogged();
   </script>
 
 </body>
